@@ -1,6 +1,10 @@
 #pragma once
 #include <cmath>
 
+#include "Figure.h"
+#include "Rhombus.h"
+
+/*
 class Figure
 {
 private:
@@ -68,3 +72,61 @@ public:
         q = f2;
     }
 };
+
+*/
+
+// Figure
+Figure::Figure()
+{
+    x1 = y1 = x2 = y2 = 0;
+}
+
+Figure::Figure(Figure& a)
+{
+    x1 = a.x1; x2 = a.x2;
+    y1 = a.y1; y2 = a.y2;
+}
+
+Figure::Figure(float x1, float y1, float x2, float y2)
+{
+    this->x1 = x1; this->x2 = x2;
+    this->y1 = y1; this->y2 = y2;
+}
+
+float Figure::length()
+{
+    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+}
+
+// Rhombus
+Rhombus::Rhombus()
+{
+    p = q = Figure();
+}
+
+Rhombus::Rhombus(Rhombus& a)
+{
+    p = a.p;
+    q = a.q;
+}
+
+Rhombus::Rhombus(Figure& f1, Figure& f2)
+{
+    p = f1;
+    q = f2;
+}
+
+float Rhombus::perimeter()
+{
+    float halfP = p.length() / 2.0f;
+    float halfQ = q.length() / 2.0f;
+    
+    float sideLength = (float) sqrt((halfP * halfP) + (halfQ * halfQ));
+    
+    return sideLength * 4.0f;
+}
+
+float Rhombus::area()
+{
+    return p.length() * q.length() / 2.0f;
+}
